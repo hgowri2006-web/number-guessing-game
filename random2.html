@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     
+</head>
+<body>
+    <div>
+        <h1>Guess the number!</h1>
+        <input id="guess" type="number">
+        <button id="submit">Check</button>
+        <button id="new">New Game</button>
+         <p id="para">Right/wrong?</p>
+         <p id="chance">Chances:5</p>
+    </div>
+    <script>
+        let randomnum= Math.floor(Math.random()*10)+1;
+        let msg=document.getElementById("para");
+        let ch=document.getElementById("chance");
+        let chance=5;
+        document.getElementById("submit").addEventListener("click",function(){
+            let guess=Number(document.getElementById("guess").value);
+        if(chance<=0){
+            alert("Game Over! The random number was" + randomnum);
+            location.reload();
+        }
+        else{
+            if(randomnum == guess){
+                alert("correct Guess! You won.!! Click new game to play again");
+                location.reload();
+            }
+            else{
+                let hint=guess < randomnum ? "higher" : "lower";
+                msg.innerText="wrong guess!Try a " + hint + " number.";
+                chance--;
+                ch.textContent="Chances left:" + chance;
+            }
+        }
+        document.getElementById("guess").focus();
+        })
+        document.getElementById("new").addEventListener("click",function(){
+             randomnum=Math.floor(Math.random()*10)+1;
+            msg.innerText="Random number generated! Start guessing";
+            chance=5;
+            ch.innerText="chances:" + chance;
+             document.getElementById("guess").value="";
+             document.getElementById("guess").focus();
+        })
+    </script>
+</body>
+</html>
